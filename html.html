@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olesine bilmiom 💖</title>
+  <style>
+    /* Cozy, loveful styling with simple animations */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe3e3, #ffd1dc);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 90%;
+      animation: fadeIn 1s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      color: #c55a8e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 2px solid #c55a8e;
+      border-radius: 0.5rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      outline: none;
+      border-color: #a34773;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #c55a8e;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .message {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      animation: fadeIn 0.5s ease-in;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Olesine bilmiom!</h1>
+    <p>sec duzgun tarihi amk sikerim belani:</p>
+    <input type="date" id="bday">
+    <button id="submitBtn">Submit</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const correctMonth = 2;  // February
+    const correctDay = 15;
+    const correctYear = 2010;
+
+    const submitBtn = document.getElementById('submitBtn');
+    const messageDiv = document.getElementById('message');
+
+    submitBtn.addEventListener('click', () => {
+      const input = document.getElementById('bday').value;
+      if (!input) {
+        messageDiv.textContent = 'Tarih sec iste!';
+        return;
+      }
+      const date = new Date(input);
+      if (
+        date.getDate() === correctDay && 
+        (date.getMonth() + 1) === correctMonth && 
+        date.getFullYear() === correctYear
+      ) {
+        // Success screen
+        document.body.innerHTML = `
+          <div class="container">
+            <h1>🎉 TEBRİKLER!</h1>
+            <p>aynen bunun için vaktini kaybetdin hehe</p>
+          </div>
+        `;
+        // Launch confetti
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      } else {
+        messageDiv.textContent = 'Yalnış şeyi seçtin gri zekalı!';
+      }
+    });
+  </script>
+</body>
+</html>
